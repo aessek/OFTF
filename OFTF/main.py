@@ -2,7 +2,7 @@ from OFTF import OFTF
 import numpy
 
 outcomes = list()
-for i in range(3000):
+for i in range(1000000):
     game = OFTF()
     game.play()
     outcomes.append(game.results)

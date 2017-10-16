@@ -14,9 +14,9 @@ class OFTF:
         """
         Adds the dice to your saved stack and removes it from the current throw
         """
-        print('saving...', dice)
-        self.saved_dice.append(dice)
-        self.thrown_dice.remove(dice)
+        for di in dice:
+            self.saved_dice.append(di)
+            self.thrown_dice.remove(di)
 
         return self
         
@@ -30,12 +30,11 @@ class OFTF:
                 if(next_dice > biggest):
                     biggest = next_dice
 
-        # if multiple is True:
-        #     for _ in range(self.thrown_dice.count(biggest)):
-        #         picked_dice.append(biggest)
-        # else:
-
-        picked_dice.append(biggest)
+        if multiple is True:
+            for _ in range(self.thrown_dice.count(biggest)):
+                picked_dice.append(biggest)
+        else:
+            picked_dice.append(biggest)
 
         return picked_dice
 
@@ -56,21 +55,24 @@ class OFTF:
     def play(self):
 
         while len(self.saved_dice) is not 6:
-            self.thrown_dice = self.dice.roll(6- len(self.saved_dice))
+            self.thrown_dice = self.dice.roll(6 - len(self.saved_dice))
 
             # Look for a one or four, take one and roll again
             if self.qualified is False:
                 if 1 in self.thrown_dice and 1 not in self.saved_dice:
-                    self.save_dice(1)
+                    self.save_dice([1])
 
                 if 4 in self.thrown_dice and 4 not in self.saved_dice:
-                    self.save_dice(4)
+                    self.save_dice([4])
 
             if(len(self.thrown_dice) is not 0):
                 # Get the biggest dice in the roll
-                biggest = self.pick_highest()
-                print(biggest, self.saved_dice, self.thrown_dice)
-                self.save_dice(biggest)
+                if 6 in self.thrown_dice:
+                    biggest = self.pick_highest(True)
+                    self.save_dice(biggest)
+                else:
+                    biggest = self.pick_highest()
+                    self.save_dice(biggest)
                 
             # Are we qualified?
             if 1 in self.saved_dice and 4 in self.saved_dice:
