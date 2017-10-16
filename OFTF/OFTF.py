@@ -5,8 +5,8 @@ class OFTF:
     def __init__(self):
         self.dice = Dice()
         self.score = 0
-        self.saved_dice = list()
-        self.thrown_dice = list()
+        self.saved_dice = []
+        self.thrown_dice = []
         self.qualified = False
         self.results = 0
 
@@ -21,7 +21,7 @@ class OFTF:
         return self
         
     def pick_highest(self, multiple=False):
-        picked_dice = list()
+        picked_dice = []
         biggest = self.thrown_dice[0]
 
         if len(self.thrown_dice) is not 1:
