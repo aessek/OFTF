@@ -11,9 +11,9 @@ class OFTF:
         self.results = 0
 
     def save_dice(self, dice):
-        """
+        '''
         Adds the dice to your saved stack and removes it from the current throw
-        """
+        '''
         for di in dice:
             self.saved_dice.append(di)
             self.thrown_dice.remove(di)
@@ -21,6 +21,12 @@ class OFTF:
         return self
         
     def pick_highest(self, multiple=False):
+        '''
+        Finds the highest dice and selects it from the list of available dice. 
+        If multiple is set to True, then if there are multiple of the determined
+        highest dice, then it will grab all of them. E.g., it will grab three 6's
+        instead of just one.
+        '''
         picked_dice = []
         biggest = self.thrown_dice[0]
 
@@ -39,6 +45,10 @@ class OFTF:
         return picked_dice
 
     def get_results(self, dice):
+        '''
+        Get the score of the saved dice. The qualifying 1 and 4 are not counted. 
+        If the player does not qualify the score is 0. 
+        '''
         result = 0
         if dice is None:
             dice = self.saved_dice
