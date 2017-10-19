@@ -74,15 +74,14 @@ class OFTF:
 
                 if 4 in self.thrown_dice and 4 not in self.saved_dice:
                     self.save_dice([4])
-
-            if(len(self.thrown_dice) is not 0):
-                # Get the biggest dice in the roll
-                if 6 in self.thrown_dice:
-                    biggest = self.pick_highest(True)
-                    self.save_dice(biggest)
-                else:
-                    biggest = self.pick_highest()
-                    self.save_dice(biggest)
+    
+            # Get the biggest dice in the roll
+            if 6 in self.thrown_dice:
+                biggest = self.pick_highest(True)
+                self.save_dice(biggest)
+            elif len(self.thrown_dice) is not 0:
+                biggest = self.pick_highest()
+                self.save_dice(biggest)
                 
             # Are we qualified?
             if 1 in self.saved_dice and 4 in self.saved_dice:
